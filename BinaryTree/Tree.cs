@@ -13,24 +13,24 @@ namespace BinaryTree
         int Right;
 
         List<int> numbers = new List<int>();
-        List<int> sort = new List<int>();
-        List<int> right = new List<int>();
+       
 
         public Tree()
         {
             int left = 0;
-            int right = 0;
-            int value = 0;
+            
+            int value = 1;
             Parent = value;
-            Left = left;
-            Right = right;
+
 
         }
 
         public void Insert()
         {
-            Console.WriteLine("Введите размер дерева: ");
+            Console.WriteLine("Введите размер дерева: ");           
             string s = Console.ReadLine();
+            Console.WriteLine(" ");
+
             int l = int.Parse(s);
             for (int i = 0; i <= l; i++) numbers.Add(1);
 
@@ -50,15 +50,102 @@ namespace BinaryTree
 
         public void Sort()
         {
-            numbers.AddRange(sort.ToArray());
+            int True = 1;
+            int index = 1;
 
-            int len = 1;
-            while (len <= numbers.Count) len = len + len;
+            /*
+                        int len = 1;
+                        while (len <= numbers.Count) len = len + len;*/
 
-            for (int i = 0; i == len; i++)
+
+            for (int k = 0; k <= numbers.Count - 1; k++)
             {
-                numbers.[i]
+                Parent = numbers[k];
+                Console.WriteLine($"Parent = {Parent}");
+
+
+                for (int i = 0; i <= numbers.Count; i++)
+                {
+
+
+                    int indexx = i;
+                    indexx = index + indexx;
+
+                    
+
+
+                    if (numbers[index] > Parent)
+                    {
+                        Right = numbers[index];
+                        Console.WriteLine($"Right = {Right}");
+                        numbers.RemoveAt(index);
+                        True = 1;
+                    }
+
+                    if (numbers[index] < Parent)
+                    {
+                        Left = numbers[index];
+                        Console.WriteLine($"Left = {Left}");
+                        True = 0;
+                        numbers.RemoveAt(index);
+                    }
+
+
+                    if (Left == null)
+                    {
+                        for (int j = index; j <= numbers.Count; j++)
+                        {
+
+                            if (numbers[j] > Parent)
+                            {
+                                j++;
+                            }
+
+                            if (numbers[j] < Parent)
+                            {
+                                Left = numbers[j];
+                                Console.WriteLine($"Left = {Left}");
+                                numbers.RemoveAt(index);
+                                break;
+                            }
+                            if (numbers[j] == numbers[numbers.Count]) break;
+                        }
+
+
+                    }
+
+                    if (Right == null)
+                    {
+                        for (int j = index; j <= numbers.Count; j++)
+                        {
+
+
+                            if (numbers[j] < Parent)
+                            {
+                                j++;
+                            }
+
+                            if (numbers[j] > Parent)
+                            {
+                                Right = numbers[j];
+                                Console.WriteLine($"Right = {Right}");
+                                numbers.RemoveAt(index);
+                                break;
+                            }
+
+                            if (numbers[j] == numbers[numbers.Count -1 ]) break;
+                        }
+                    }
+
+                        if (index == numbers[numbers.Count - 1]) break;
+                    i = i -2;
+                    Console.WriteLine(" ");
+                }
+
             }
+           
+
+            
 
         }
 
@@ -118,31 +205,31 @@ namespace BinaryTree
               {
 
                   int index = i;
-                  int indexI = i;
+                  int  i + 1 = i;
 
-                  indexI = indexI + 1;
+                   i + 1 =  i + 1 + 1;
                   numbers[i] = Parent;
                   Console.WriteLine("Parent = ", Left);
 
 
 
-                  if (indexI == numbers.Count)
+                  if ( i + 1 == numbers.Count)
                   {
                       break;
                   }
 
-                  if (numbers[indexI] > Parent) { 
+                  if (numbers[ i + 1] > Parent) { 
 
-                      numbers[indexI] = Right;
+                      numbers[ i + 1] = Right;
                       Console.WriteLine("Right = ", Right);                   
                       True = 1;
 
                   }
 
-                  if (numbers[indexI] < Parent) { 
+                  if (numbers[ i + 1] < Parent) { 
 
 
-                      numbers[indexI] = Left;
+                      numbers[ i + 1] = Left;
                       Console.WriteLine("Left = ", Left);
                       True = 0;
 
