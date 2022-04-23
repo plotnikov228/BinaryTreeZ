@@ -9,8 +9,8 @@ namespace BinaryTree
 
 
     internal class Program
-    {
-
+    {       
+            
         static void Main(string[] args)
         {
             Tree tree = new Tree();
@@ -18,10 +18,12 @@ namespace BinaryTree
             tree.Print();
             tree.Sort();
 
-
+            
 
 
             Console.ReadKey();
         }
+
+        
     }
 }

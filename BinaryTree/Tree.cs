@@ -8,21 +8,28 @@ namespace BinaryTree
 {
     internal class Tree
     {
-        int Parent;
-        int Left;
-        int Right;
-
+        int a;
         List<int> numbers = new List<int>();
-       
+        List<int> numbersF = new List<int>();
 
-        public Tree()
+
+        public struct LeftEl
         {
-            int left = 0;
+            public int Value;
+        }
+
+        public struct RightEl
+        {
+            public int Value;
             
-            int value = 1;
-            Parent = value;
+        }
 
 
+        public struct Element
+        {
+            public int Value;
+            public LeftEl Left;
+            public RightEl Right;
         }
 
         public void Insert()
@@ -30,7 +37,7 @@ namespace BinaryTree
             Console.WriteLine("Введите размер дерева: ");           
             string s = Console.ReadLine();
             Console.WriteLine(" ");
-
+            
             int l = int.Parse(s);
             for (int i = 0; i <= l; i++) numbers.Add(1);
 
@@ -47,237 +54,747 @@ namespace BinaryTree
 
         }
 
-
         public void Sort()
         {
-            int True = 1;
-            int index = 1;
+            numbersF = numbers.GetRange(0, numbers.Count);
 
-            /*
-                        int len = 1;
-                        while (len <= numbers.Count) len = len + len;*/
+            Element Parent;
+            Element Left;
+            Element Right;
+
+            Parent.Value = numbers[0];
+
+            Right.Value = 899328798;
+            Left.Value = 899328798;
+            Parent.Right.Value = 899328798;
+            Parent.Left.Value = 899328798;
+            Right.Right.Value = 899328798;
+            Right.Left.Value = 899328798;
+            Left.Right.Value = 899328798;
+            Left.Left.Value = 899328798;
 
 
-            for (int k = 0; k <= numbers.Count - 1; k++)
+
+            for (int i = 0; i < numbers.Count; i++)
             {
-                Parent = numbers[k];
-                Console.WriteLine($"Parent = {Parent}");
+                if (numbersF.Count == 0) break;
+
+                if (i == 0)
+                {
+                    Parent.Value = numbersF[0];
+                    Console.WriteLine("Parent = " + Parent.Value);
+                    bool RightB = false;
+                    bool LeftB = false;
 
 
-                for (int i = 0; i <= numbers.Count; i++)
+                    for (int j = 0; j <= numbersF.Count - 1; j++)
+                    {
+
+                        
+
+                        if (numbersF[j] == Parent.Value)
+                        {
+                            numbersF.RemoveAt(j);
+                        }
+
+                        if (numbersF.Count == 0) break;
+
+                        if (numbersF[j] > Parent.Value)
+                        {
+                            Right.Value = numbersF[j];
+                            numbersF.RemoveAt(j);
+                            RightB = true;
+                        }                      
+
+                        if (numbersF.Count == 0) break;
+
+                        if (numbersF[j] < Parent.Value)
+                        {
+                            Left.Value = numbersF[j];
+                            numbersF.RemoveAt(j);
+                            LeftB = true;
+                        } 
+                        
+                        if (numbersF.Count == 0) break;
+                        
+                        if (RightB == false)
+                        {
+                            for (int k = j; k <= numbersF.Count; k++)
+                            {
+                                if (k == numbersF.Count) break;
+
+                                if (numbersF[k] > Parent.Value)
+                                {
+                                    Right.Value = numbersF[k];
+                                    numbersF.RemoveAt(k);
+                                    RightB = true;
+                                    break;
+
+                                }
+
+                                if (numbersF[k] < Parent.Value)
+                                {
+
+                                }
+
+
+                            }
+
+                        }
+                       
+                        if (LeftB == false)
+                        {
+                            for (int k = j; k <= numbersF.Count; k++)
+                            {
+                                if (k == numbersF.Count) break;
+
+                                if (numbersF[k] > Parent.Value)
+                                {
+
+                                }
+
+                                if (numbersF[k] < Parent.Value)
+                                {
+                                    Left.Value = numbersF[k];
+                                    numbersF.RemoveAt(k);
+                                    LeftB = true;
+                                    break;
+                                }
+                            }
+
+
+                        }
+
+                        if (RightB == true)
+                            if (LeftB ==true) break;
+
+                        
+                        
+                    }
+
+                    if(Right.Value != 899328798)
+                    {
+                        Console.WriteLine("Right = " + Right.Value);
+                    }
+
+                    if(Left.Value != 899328798)
+                    {
+                        Console.WriteLine("Left = " + Left.Value);
+                    }
+
+                    Parent.Right.Value = Right.Value;
+                    Parent.Left.Value = Left.Value;
+                }
+
+                if (i == 1)
                 {
 
+                    Parent.Value = Parent.Right.Value;
+                    Console.WriteLine("Parent = " + Parent.Value);
+                    bool RightA = false;
+                    bool RightB = false;
+                    for (int j = 0; j <= numbersF.Count - 1; j++)
+                    {
 
-                    int indexx = i;
-                    indexx = index + indexx;
+                        if (numbersF[j] == Parent.Value)
+                        {
+                            numbersF.RemoveAt(j);
+                        }
 
+                        if (numbersF[j] > Parent.Value)
+                        {
+                            for (int k = j; k < numbersF.Count; k++)
+                            {
+                                if (k == numbersF.Count) break;
+
+                                if (numbersF[k] > Parent.Value)
+                                {
+                                    Right.Right.Value = numbersF[k];
+                                    numbersF.RemoveAt(k);
+                                    RightA = true;
+                                    break;
+
+                                }
+
+                                if (numbersF[k] < Parent.Value)
+                                {
+
+                                }
+                            }
+
+                        }
+
+
+
+                        if (numbersF[j] < Parent.Value)
+                        {
+                                for (int k = j; k < numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+
+                                    }
+                                    
+
+                                    if (numbersF[k] < Parent.Value)
+                                    {
+                                        Right.Left.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightB = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                       if (RightA == true)
+                            if (RightB == true) break;
+
+                    }
+
+
+                    if (Right.Right.Value != 899328798)
+                    {
+                        Console.WriteLine("Right = " + Right.Right.Value);
+                    }
+                    if (Right.Left.Value != 899328798)
+                    {
+                        Console.WriteLine("Left = " + Right.Left.Value);
+                    }
+
+
+
+
+                    Parent.Value = Parent.Left.Value;
+                    Console.WriteLine("Parent = " + Parent.Left.Value);
+                    RightA = false;
+                    RightB = false;
+                    for (int j = 0; j <= numbersF.Count - 1; j++)
+                    {
+
+
+                        if (numbersF[j] == Parent.Value)
+                        {
+                            numbersF.RemoveAt(j);
+                        }
+
+                        if (numbersF[j] > Parent.Value)
+                        {
+
+                            if (numbersF[j] < Right.Left.Value)
+                            {
+
+                                Left.Right.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightA = true;
+
+                            }
+
+                            else
+                            {
+                                RightA = false;
+                            }
+
+                        }
+
+
+
+                        if (numbersF.Count == 0) break;
+
+                        if (numbersF[j] < Parent.Value)
+                        {
+                            if (numbersF[j] < Right.Left.Value)
+                            {
+                                Left.Left.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightB = true;
+                            }
+
+
+                            if (numbersF.Count == 0) break;
+
+
+                        }
+
+
+
+                        
+
+                        if (RightA == true)
+                            if (RightB == true) break;
+                    }
                     
-
-
-                    if (numbers[index] > Parent)
-                    {
-                        Right = numbers[index];
-                        Console.WriteLine($"Right = {Right}");
-                        numbers.RemoveAt(index);
-                        True = 1;
-                    }
-
-                    if (numbers[index] < Parent)
-                    {
-                        Left = numbers[index];
-                        Console.WriteLine($"Left = {Left}");
-                        True = 0;
-                        numbers.RemoveAt(index);
-                    }
-
-
-                    if (Left == null)
-                    {
-                        for (int j = index; j <= numbers.Count; j++)
+                    if (Left.Right.Value != 899328798)
                         {
-
-                            if (numbers[j] > Parent)
-                            {
-                                j++;
-                            }
-
-                            if (numbers[j] < Parent)
-                            {
-                                Left = numbers[j];
-                                Console.WriteLine($"Left = {Left}");
-                                numbers.RemoveAt(index);
-                                break;
-                            }
-                            if (numbers[j] == numbers[numbers.Count]) break;
+                            Console.WriteLine("Right = " + Left.Right.Value);
+                        }
+                    if (Left.Left.Value != 899328798)
+                        {
+                            Console.WriteLine("Left = " + Left.Left.Value);
                         }
 
+                }
 
-                    }
-
-                    if (Right == null)
+                else
+                {
+                    int RightLeft = Right.Left.Value;
+                    int LeftLeft = Left.Left.Value;
+                    if (Right.Right.Value != 899328798)
                     {
-                        for (int j = index; j <= numbers.Count; j++)
+
+                        Parent.Right.Value = Right.Right.Value;
+                        Parent.Value = Parent.Right.Value;
+                        Console.WriteLine("Parent = " + Parent.Right.Value);
+                        bool RightA = false;
+                        bool RightB = false;
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
 
 
-                            if (numbers[j] < Parent)
+
+                            if (numbersF[j] == Parent.Value)
                             {
-                                j++;
+                                numbersF.RemoveAt(j);
                             }
 
-                            if (numbers[j] > Parent)
+                            if (numbersF[j] > Parent.Value)
                             {
-                                Right = numbers[j];
-                                Console.WriteLine($"Right = {Right}");
-                                numbers.RemoveAt(index);
-                                break;
+                                Right.Right.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightA = true;
                             }
 
-                            if (numbers[j] == numbers[numbers.Count -1 ]) break;
+                            if (RightA == false)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+                                        Right.Right.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+                                        break;
+
+                                    }
+
+                                    if (numbersF[k] < Parent.Value)
+                                    {
+
+                                    }
+
+
+                                }
+
+                            }
+
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] < Parent.Value)
+                            {
+                                Right.Left.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightB = true;
+                            }
+
+                            if (RightB == false)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+
+                                    }
+
+                                    if (numbersF[k] < Parent.Value)
+                                    {
+                                        Right.Left.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightB = true;
+                                        break;
+                                    }
+                                }
+
+
+                            }
+
+                            if (numbersF.Count == 0) break;
+
+
                         }
-                    }
 
-                        if (index == numbers[numbers.Count - 1]) break;
-                    i = i -2;
-                    Console.WriteLine(" ");
+
+                        if (RightA == true)
+                        {
+                            Console.WriteLine("Right = " + Right.Right.Value);
+                        }
+                        if (RightB == true)
+                        {
+                            Console.WriteLine("Left = " + Right.Left.Value);
+                        }
+
+                        if (RightA == true)
+                            if (RightB == true) break;
+
+                        if (a == 1)
+                        {/*Parent.Value = Parent.Right.Value;
+                        Console.WriteLine("Parent = " + Parent.Value);
+                        RightA = false;
+                        RightB = false;
+
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
+                        {
+
+
+
+                            if (numbersF[j] == Parent.Value)
+                            {
+                                numbersF.RemoveAt(j);
+                            }
+
+                            if (numbersF[j] > Parent.Value)
+                            {
+                                Right.Right.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightA = true;
+                            }
+
+                            if (RightA == false)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+                                        Right.Right.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+                                        break;
+
+                                    }
+
+                                    if (numbersF[k] < Parent.Value)
+                                    {
+
+                                    }
+
+
+                                }
+
+                            }
+
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] < Parent.Value)
+                            {
+                                Right.Left.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightB = true;
+                            }
+
+                            if (RightB == false)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+
+                                    }
+
+                                    if (numbersF[k] < Parent.Value)
+                                    {
+                                        Right.Left.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightB = true;
+                                        break;
+                                    }
+                                }
+
+
+                            }
+
+                            if (numbersF.Count == 0) break;
+                        }
+
+                        if (RightA == true)
+                        {
+                            Console.WriteLine("Right = " + Right.Right.Value);
+                        }
+                        if (RightB == true)
+                        {
+                            Console.WriteLine("Left = " + Right.Left.Value);
+                        }
+*/
+                        }
+
+                    }
+                    if (RightLeft != 899328798)
+                    {
+
+                        Parent.Right.Value = RightLeft;
+                        Parent.Value = Parent.Right.Value;
+                        Console.WriteLine("Parent = " + Parent.Right.Value);
+                        bool RightA = false;
+                        bool RightB = false;
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
+                        {
+
+
+
+                            if (numbersF[j] == Parent.Value)
+                            {
+                                numbersF.RemoveAt(j);
+                            }
+
+                            if (numbersF[j] > Parent.Value)
+                            {
+
+                                Right.Right.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightA = true;
+                            }
+
+                            if (RightA == false)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+                                        Right.Right.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+                                        break;
+
+                                    }
+
+                                    else;
+
+
+                                }
+
+                            }
+
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] < Parent.Value)
+                            {
+                                Right.Left.Value = numbersF[j];
+                                numbersF.RemoveAt(j);
+                                RightB = true;
+                            }
+
+                            if (RightB == false)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+
+                                    if (numbersF[k] > Parent.Value)
+                                    {
+
+                                    }
+
+                                    if (numbersF[k] < Parent.Value)
+                                    {
+                                        Right.Left.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightB = true;
+                                        break;
+                                    }
+                                }
+
+
+                            }
+
+                            if (numbersF.Count == 0) break;
+
+
+                        }
+
+
+                        if (RightA == true)
+                        {
+                            Console.WriteLine("Right = " + Right.Right.Value);
+                        }
+                        if (RightB == true)
+                        {
+                            Console.WriteLine("Left = " + Right.Left.Value);
+                        }
+
+                        if (RightA == true)
+                            if (RightB == true) break;
+
+                    }
+                    if (Left.Right.Value != 899328798)
+                    {
+
+                        Parent.Left.Value = Left.Right.Value;
+                        Parent.Value = Parent.Left.Value;
+                        Console.WriteLine("Parent = " + Parent.Left.Value);
+                        bool RightA = false;
+                        bool RightB = false;
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
+                        {
+
+
+                            if (numbersF[j] == Parent.Value)
+                            {
+                                numbersF.RemoveAt(j);
+                            }
+
+                            if (numbersF[j] > Parent.Value)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+                                    if (numbersF[j] < Right.Left.Value)
+                                    {
+                                        Left.Right.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+
+                                    }
+
+                                    else;
+
+                                }
+
+                            }
+
+
+
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] < Parent.Value)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+                                    if (numbersF[j] < Right.Left.Value)
+                                    {
+                                        Left.Left.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+
+                                    }
+
+                                    else;
+
+                                }
+                            }
+
+                            if (numbersF.Count == 0) break;
+
+
+                        }
+
+
+
+                        if (RightA == true)
+                        {
+                            Console.WriteLine("Right = " + Left.Right.Value);
+                        }
+                        if (RightB == true)
+                        {
+                            Console.WriteLine("Left = " + Left.Left.Value);
+                        }
+
+                        if (RightA == true)
+                            if (RightB == true) break;
+                    }
+                    if (LeftLeft != 899328798)
+                    {
+
+                        Parent.Left.Value = LeftLeft;
+                        Parent.Value = Parent.Left.Value;
+                        Console.WriteLine("Parent = " + Parent.Left.Value);
+                        bool RightA = false;
+                        bool RightB = false;
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
+                        {
+
+
+                            if (numbersF[j] == Parent.Value)
+                            {
+                                numbersF.RemoveAt(j);
+                            }
+
+                            if (numbersF[j] > Parent.Value)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+                                    if (numbersF[j] < Right.Left.Value)
+                                    {
+                                        Left.Right.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+
+                                    }
+
+                                    else;
+
+                                }
+
+                            }
+
+
+
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] < Parent.Value)
+                            {
+                                for (int k = j; k <= numbersF.Count; k++)
+                                {
+                                    if (k == numbersF.Count) break;
+                                    if (numbersF[j] < Right.Left.Value)
+                                    {
+                                        Left.Left.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+
+                                    }
+
+                                    else;
+
+                                }
+                            }
+
+                            
+
+                            if (numbersF.Count == 0) break;
+
+
+                        }
+
+
+
+                        if (RightA == true)
+                        {
+                            Console.WriteLine("Right = " + Left.Right.Value);
+                        }
+                        if (RightB == true)
+                        {
+                            Console.WriteLine("Left = " + Left.Left.Value);
+                        }
+
+                        if (RightA == true)
+                            if (RightB == true) break;
+                    }
                 }
 
             }
-           
-
-            
-
         }
 
-        /*public void Sort()
-        {
-            int True = 0;
-            *//*int len = 1;
-            while (len <= numbers.Count) len = len + len;*//*
-
-            for (int i = 0; i <= numbers.Count; i++)
-            {
-                int index = i;
-                numbers[i] = Parent;
-
-                Console.WriteLine("Parent = ", Parent);
-
-                if (numbers[i + 1] > Parent){
-                    numbers[i + 1] = Right;
-                    Console.WriteLine("Right = ", Right);
-                    True = 1;
-                }
-
-                if (numbers[i + 1] < Parent)
-                {
-                    numbers[i + 1] = Left;
-                    Console.WriteLine("Left = ", Left);
-                    True = 0;
-                }
-
-                for ( int j = 0; j < numbers.Count; j++)
-                {
-                    if (True == 1)
-                    {
-                        i++;
-                    }
-                    if (True == 1)
-                    {
-                        i = index;
-                    }
-
-                }
-
-
-
-            }
-        }*/
-
-        /*  public void Sort()
-          {
-
-              numbers.AddRange(sort.ToArray());
-
-              int True = 1;
-
-
-              for (int i = 0; i <= numbers.Count - 1; i++)
-              {
-
-                  int index = i;
-                  int  i + 1 = i;
-
-                   i + 1 =  i + 1 + 1;
-                  numbers[i] = Parent;
-                  Console.WriteLine("Parent = ", Left);
-
-
-
-                  if ( i + 1 == numbers.Count)
-                  {
-                      break;
-                  }
-
-                  if (numbers[ i + 1] > Parent) { 
-
-                      numbers[ i + 1] = Right;
-                      Console.WriteLine("Right = ", Right);                   
-                      True = 1;
-
-                  }
-
-                  if (numbers[ i + 1] < Parent) { 
-
-
-                      numbers[ i + 1] = Left;
-                      Console.WriteLine("Left = ", Left);
-                      True = 0;
-
-                  }
-
-                  if (True == 1)
-                  {
-
-                      for (int j = index; j <= numbers.Count; j++)
-                      {   
-                          int indexJ = j;
-                          indexJ = j + 1;
-                          if (j >= numbers.Count) break;
-
-                          if (numbers[indexJ] > Parent) j++;
-                          if (numbers[indexJ] < Parent)
-                          {
-                              numbers[indexJ] = Left;
-                              break;
-                          }
-
-
-                      }
-                  }
-
-                  if (True == 0)
-                  {
-                      for (int j = index; j <= numbers.Count; j++)
-                      {
-                          int indexJ = j;
-                          indexJ = j + 1;
-                          if (j >= numbers.Count) break;
-
-                          if (numbers[indexJ] > Parent)
-                          {
-                              numbers[indexJ] = Right;
-                              break;
-                          }
-                          if (numbers[indexJ] < Parent) j++;
-
-
-                      }
-                  }
-
-
-              }
-          }
-  */
 
         public void Print()
         {
