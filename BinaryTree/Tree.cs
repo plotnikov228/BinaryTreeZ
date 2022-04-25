@@ -447,12 +447,7 @@ namespace BinaryTree
                                 {
                                     if (k == numbersF.Count) break;
 
-                                    if (numbersF[k] > Parent.Value)
-                                    {
-
-                                    }
-
-                                    if (numbersF[k] < Parent.Value)
+                                    if (numbersF[k] < Right.Right.Value)
                                     {
                                         Right.Left.Value = numbersF[k];
                                         numbersF.RemoveAt(k);
