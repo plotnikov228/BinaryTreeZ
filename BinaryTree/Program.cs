@@ -16,10 +16,14 @@ namespace BinaryTree
             Tree tree = new Tree();
             tree.InsertRand();
             tree.Print();
+            Console.WriteLine("");
             tree.Sort();
-
-            
-
+            tree.Remove();
+            tree.Print();
+            Console.WriteLine("");
+            tree.Sort();
+            Console.WriteLine("");
+            tree.Find();
 
             Console.ReadKey();
         }
