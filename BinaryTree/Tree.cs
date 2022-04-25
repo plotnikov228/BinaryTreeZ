@@ -41,7 +41,7 @@ namespace BinaryTree
             int l = int.Parse(s);
             for (int i = 0; i <= l; i++) numbers.Add(1);
 
-            for (int i = 0; i <= l - 1; i++)
+            for (int i = 0; i <= l; i++)
             {
                 Console.WriteLine("Введите число: ");
                 string num = Console.ReadLine();
@@ -53,6 +53,29 @@ namespace BinaryTree
             numbers.RemoveAt(numbers.Count - 1);
 
         }
+
+        public void InsertRand()
+        {
+            Console.WriteLine("Введите размер дерева: ");
+            string s = Console.ReadLine();
+            Console.WriteLine(" ");
+
+            Random rnd = new Random();
+
+            int l = int.Parse(s);
+            for (int i = 0; i <= l; i++) numbers.Add(1);
+
+            for (int i = 0; i <= l - 1; i++)
+            {
+                
+                numbers.Insert(i, rnd.Next(1, 25));
+                numbers.RemoveAt(i+1);
+            }
+
+            numbers.RemoveAt(numbers.Count - 1);
+
+        }
+
 
         public void Sort()
         {
@@ -87,36 +110,18 @@ namespace BinaryTree
                     bool LeftB = false;
 
 
-                    for (int j = 0; j <= numbersF.Count - 1; j++)
+                    for (int j = 0; j <= numbersF.Count; j++)
                     {
 
-                        
+                        if (j == numbersF.Count) break;
 
                         if (numbersF[j] == Parent.Value)
                         {
-                            numbersF.RemoveAt(j);
+                            j = j++;
                         }
 
-                        if (numbersF.Count == 0) break;
+                        if (j == numbersF.Count) break;
 
-                        if (numbersF[j] > Parent.Value)
-                        {
-                            Right.Value = numbersF[j];
-                            numbersF.RemoveAt(j);
-                            RightB = true;
-                        }                      
-
-                        if (numbersF.Count == 0) break;
-
-                        if (numbersF[j] < Parent.Value)
-                        {
-                            Left.Value = numbersF[j];
-                            numbersF.RemoveAt(j);
-                            LeftB = true;
-                        } 
-                        
-                        if (numbersF.Count == 0) break;
-                        
                         if (RightB == false)
                         {
                             for (int k = j; k <= numbersF.Count; k++)
@@ -132,26 +137,18 @@ namespace BinaryTree
 
                                 }
 
-                                if (numbersF[k] < Parent.Value)
-                                {
-
-                                }
-
-
                             }
+                        }        
+                        
+                        if (numbersF.Count == 0) break;
 
-                        }
-                       
+                        if (j == numbersF.Count) break;
+
                         if (LeftB == false)
                         {
                             for (int k = j; k <= numbersF.Count; k++)
                             {
                                 if (k == numbersF.Count) break;
-
-                                if (numbersF[k] > Parent.Value)
-                                {
-
-                                }
 
                                 if (numbersF[k] < Parent.Value)
                                 {
@@ -160,126 +157,133 @@ namespace BinaryTree
                                     LeftB = true;
                                     break;
                                 }
+
+
+
+
                             }
-
-
                         }
+
+                        if (numbersF.Count == 0) break;                       
 
                         if (RightB == true)
                             if (LeftB ==true) break;
 
-                        
-                        
+                        if (j == numbersF.Count) break;
+
                     }
 
-                    if(Right.Value != 899328798)
+                    if(RightB == true)
                     {
                         Console.WriteLine("Right = " + Right.Value);
                     }
 
-                    if(Left.Value != 899328798)
+                    if(LeftB == true)
                     {
                         Console.WriteLine("Left = " + Left.Value);
                     }
 
-                    Parent.Right.Value = Right.Value;
-                    Parent.Left.Value = Left.Value;
                 }
 
                 if (i == 1)
                 {
-
-                    Parent.Value = Parent.Right.Value;
-                    Console.WriteLine("Parent = " + Parent.Value);
-                    bool RightA = false;
-                    bool RightB = false;
-                    for (int j = 0; j <= numbersF.Count - 1; j++)
+                    if (Right.Value != 899328798)
                     {
-
-                        if (numbersF[j] == Parent.Value)
+                        Parent.Value = Right.Value;
+                        Console.WriteLine("Parent = " + Parent.Value);
+                        bool RightA = false;
+                        bool RightB = false;
+                        for (int j = 0; j <= numbersF.Count; j++)
                         {
-                            numbersF.RemoveAt(j);
-                        }
+                            if (j == numbersF.Count) break;
 
-                        if (numbersF[j] > Parent.Value)
-                        {
-                            for (int k = j; k < numbersF.Count; k++)
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] == Parent.Value)
                             {
-                                if (k == numbersF.Count) break;
-
-                                if (numbersF[k] > Parent.Value)
-                                {
-                                    Right.Right.Value = numbersF[k];
-                                    numbersF.RemoveAt(k);
-                                    RightA = true;
-                                    break;
-
-                                }
-
-                                if (numbersF[k] < Parent.Value)
-                                {
-
-                                }
+                                j = j++;
                             }
 
-                        }
+                            if (j == numbersF.Count) break;
 
-
-
-                        if (numbersF[j] < Parent.Value)
-                        {
+                            if (numbersF[j] > Parent.Value)
+                            {
                                 for (int k = j; k < numbersF.Count; k++)
                                 {
                                     if (k == numbersF.Count) break;
 
                                     if (numbersF[k] > Parent.Value)
                                     {
+                                        Right.Right.Value = numbersF[k];
+                                        numbersF.RemoveAt(k);
+                                        RightA = true;
+                                        break;
 
                                     }
-                                    
 
                                     if (numbersF[k] < Parent.Value)
                                     {
-                                        Right.Left.Value = numbersF[k];
-                                        numbersF.RemoveAt(k);
-                                        RightB = true;
-                                        break;
+
                                     }
                                 }
+
                             }
 
-                       if (RightA == true)
-                            if (RightB == true) break;
+                            if (j == numbersF.Count) break;
 
-                    }
+                            if (numbersF[j] < Parent.Value)
+                            {
+                                    for (int k = j; k < numbersF.Count; k++)
+                                    {
+                                        if (k == numbersF.Count) break;                                       
 
+                                        if (numbersF[k] < Parent.Value)
+                                        {
+                                            Right.Left.Value = numbersF[k];
+                                            numbersF.RemoveAt(k);
+                                            RightB = true;
+                                            break;
+                                        }
+                                    }
+                                }
 
-                    if (Right.Right.Value != 899328798)
-                    {
-                        Console.WriteLine("Right = " + Right.Right.Value);
-                    }
-                    if (Right.Left.Value != 899328798)
-                    {
-                        Console.WriteLine("Left = " + Right.Left.Value);
-                    }
+                           if (RightA == true)
+                                if (RightB == true) break;
 
-
-
-
-                    Parent.Value = Parent.Left.Value;
-                    Console.WriteLine("Parent = " + Parent.Left.Value);
-                    RightA = false;
-                    RightB = false;
-                    for (int j = 0; j <= numbersF.Count - 1; j++)
-                    {
-
-
-                        if (numbersF[j] == Parent.Value)
-                        {
-                            numbersF.RemoveAt(j);
                         }
 
-                        if (numbersF[j] > Parent.Value)
+
+                        if (RightA == true)
+                        {
+                            Console.WriteLine("Right = " + Right.Right.Value);
+                        }
+                        if (RightB == true)
+                        {
+                            Console.WriteLine("Left = " + Right.Left.Value);
+                        }
+
+                    }
+
+                    if (Left.Value != 899328798)
+                    {
+                        Parent.Value = Left.Value;
+                    Console.WriteLine("Parent = " + Parent.Value);
+                    bool RightA = false;
+                    bool RightB = false;
+                    for (int j = 0; j <= numbersF.Count; j++)
+                    {
+                            if (j == numbersF.Count) break;
+
+                            if (numbersF.Count == 0) break;
+
+                            if (numbersF[j] == Parent.Value)
+                            {
+                                j = j++;
+                            }
+
+                            if (j == numbersF.Count) break;
+
+                            if (numbersF[j] > Parent.Value)
                         {
 
                             if (numbersF[j] < Right.Left.Value)
@@ -298,11 +302,11 @@ namespace BinaryTree
 
                         }
 
-
-
                         if (numbersF.Count == 0) break;
 
-                        if (numbersF[j] < Parent.Value)
+                            if (j == numbersF.Count) break;
+
+                            if (numbersF[j] < Parent.Value)
                         {
                             if (numbersF[j] < Right.Left.Value)
                             {
@@ -325,14 +329,15 @@ namespace BinaryTree
                             if (RightB == true) break;
                     }
                     
-                    if (Left.Right.Value != 899328798)
+                    if (RightA == true)
                         {
                             Console.WriteLine("Right = " + Left.Right.Value);
                         }
-                    if (Left.Left.Value != 899328798)
+                    if (RightB == true)
                         {
                             Console.WriteLine("Left = " + Left.Left.Value);
                         }
+                    }
 
                 }
 
@@ -351,20 +356,17 @@ namespace BinaryTree
                         for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
 
+                            if (j == numbersF.Count) break;
 
+                            if (numbersF.Count == 0) break;
 
                             if (numbersF[j] == Parent.Value)
                             {
-                                numbersF.RemoveAt(j);
+                                j = j++;
                             }
 
-                            if (numbersF[j] > Parent.Value)
-                            {
-                                Right.Right.Value = numbersF[j];
-                                numbersF.RemoveAt(j);
-                                RightA = true;
-                            }
-
+                            if (j == numbersF.Count) break;
+                           
                             if (RightA == false)
                             {
                                 for (int k = j; k <= numbersF.Count; k++)
@@ -392,12 +394,9 @@ namespace BinaryTree
 
                             if (numbersF.Count == 0) break;
 
-                            if (numbersF[j] < Parent.Value)
-                            {
-                                Right.Left.Value = numbersF[j];
-                                numbersF.RemoveAt(j);
-                                RightB = true;
-                            }
+                            if (j == numbersF.Count) break;
+
+                            if (numbersF.Count == 0) break;                            
 
                             if (RightB == false)
                             {
@@ -438,106 +437,11 @@ namespace BinaryTree
                         }
 
                         if (RightA == true)
-                            if (RightB == true) break;
-
-                        if (a == 1)
-                        {/*Parent.Value = Parent.Right.Value;
-                        Console.WriteLine("Parent = " + Parent.Value);
-                        RightA = false;
-                        RightB = false;
-
-                        for (int j = 0; j <= numbersF.Count - 1; j++)
-                        {
-
-
-
-                            if (numbersF[j] == Parent.Value)
-                            {
-                                numbersF.RemoveAt(j);
-                            }
-
-                            if (numbersF[j] > Parent.Value)
-                            {
-                                Right.Right.Value = numbersF[j];
-                                numbersF.RemoveAt(j);
-                                RightA = true;
-                            }
-
-                            if (RightA == false)
-                            {
-                                for (int k = j; k <= numbersF.Count; k++)
-                                {
-                                    if (k == numbersF.Count) break;
-
-                                    if (numbersF[k] > Parent.Value)
-                                    {
-                                        Right.Right.Value = numbersF[k];
-                                        numbersF.RemoveAt(k);
-                                        RightA = true;
-                                        break;
-
-                                    }
-
-                                    if (numbersF[k] < Parent.Value)
-                                    {
-
-                                    }
-
-
-                                }
-
-                            }
-
-                            if (numbersF.Count == 0) break;
-
-                            if (numbersF[j] < Parent.Value)
-                            {
-                                Right.Left.Value = numbersF[j];
-                                numbersF.RemoveAt(j);
-                                RightB = true;
-                            }
-
-                            if (RightB == false)
-                            {
-                                for (int k = j; k <= numbersF.Count; k++)
-                                {
-                                    if (k == numbersF.Count) break;
-
-                                    if (numbersF[k] > Parent.Value)
-                                    {
-
-                                    }
-
-                                    if (numbersF[k] < Parent.Value)
-                                    {
-                                        Right.Left.Value = numbersF[k];
-                                        numbersF.RemoveAt(k);
-                                        RightB = true;
-                                        break;
-                                    }
-                                }
-
-
-                            }
-
-                            if (numbersF.Count == 0) break;
-                        }
-
-                        if (RightA == true)
-                        {
-                            Console.WriteLine("Right = " + Right.Right.Value);
-                        }
-                        if (RightB == true)
-                        {
-                            Console.WriteLine("Left = " + Right.Left.Value);
-                        }
-*/
-                        }
+                            if (RightB == true) break; 
 
                     }
                     if (RightLeft != 899328798)
                     {
-
                         Parent.Right.Value = RightLeft;
                         Parent.Value = Parent.Right.Value;
                         Console.WriteLine("Parent = " + Parent.Right.Value);
@@ -545,75 +449,55 @@ namespace BinaryTree
                         bool RightB = false;
                         for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
+                            if (j == numbersF.Count) break;
 
-
+                            if (numbersF.Count == 0) break;
 
                             if (numbersF[j] == Parent.Value)
                             {
-                                numbersF.RemoveAt(j);
+                                j = j++;
                             }
+
+                            if (j == numbersF.Count) break;
 
                             if (numbersF[j] > Parent.Value)
-                            {
-
-                                Right.Right.Value = numbersF[j];
-                                numbersF.RemoveAt(j);
-                                RightA = true;
-                            }
-
-                            if (RightA == false)
                             {
                                 for (int k = j; k <= numbersF.Count; k++)
                                 {
                                     if (k == numbersF.Count) break;
-
-                                    if (numbersF[k] > Parent.Value)
+                                    if (numbersF[j] < Right.Right.Value)
                                     {
                                         Right.Right.Value = numbersF[k];
                                         numbersF.RemoveAt(k);
                                         RightA = true;
                                         break;
-
                                     }
 
                                     else;
 
-
                                 }
-
                             }
+
 
                             if (numbersF.Count == 0) break;
 
                             if (numbersF[j] < Parent.Value)
                             {
-                                Right.Left.Value = numbersF[j];
-                                numbersF.RemoveAt(j);
-                                RightB = true;
-                            }
-
-                            if (RightB == false)
-                            {
                                 for (int k = j; k <= numbersF.Count; k++)
                                 {
                                     if (k == numbersF.Count) break;
-
-                                    if (numbersF[k] > Parent.Value)
-                                    {
-
-                                    }
-
-                                    if (numbersF[k] < Parent.Value)
+                                    if (numbersF[j] < Right.Right.Value)
                                     {
                                         Right.Left.Value = numbersF[k];
                                         numbersF.RemoveAt(k);
                                         RightB = true;
                                         break;
                                     }
+
+                                    else;
+
                                 }
-
-
-                            }
+                            }                            
 
                             if (numbersF.Count == 0) break;
 
@@ -642,15 +526,18 @@ namespace BinaryTree
                         Console.WriteLine("Parent = " + Parent.Left.Value);
                         bool RightA = false;
                         bool RightB = false;
-                        for (int j = 0; j <= numbersF.Count - 1; j++)
+                        for (int j = 0; j <= numbersF.Count ; j++)
                         {
+                            if (j == numbersF.Count) break;
 
+                            if (numbersF.Count == 0) break;
 
                             if (numbersF[j] == Parent.Value)
                             {
-                                numbersF.RemoveAt(j);
+                                j = j++;
                             }
 
+                            if (j == numbersF.Count) break;
                             if (numbersF[j] > Parent.Value)
                             {
                                 for (int k = j; k <= numbersF.Count; k++)
@@ -683,7 +570,7 @@ namespace BinaryTree
                                     {
                                         Left.Left.Value = numbersF[k];
                                         numbersF.RemoveAt(k);
-                                        RightA = true;
+                                        RightB = true;
 
                                     }
 
@@ -719,14 +606,18 @@ namespace BinaryTree
                         Console.WriteLine("Parent = " + Parent.Left.Value);
                         bool RightA = false;
                         bool RightB = false;
-                        for (int j = 0; j <= numbersF.Count - 1; j++)
+                        for (int j = 0; j <= numbersF.Count; j++)
                         {
+                            if (j == numbersF.Count) break;
 
+                            if (numbersF.Count == 0) break;
 
                             if (numbersF[j] == Parent.Value)
                             {
-                                numbersF.RemoveAt(j);
+                                j = j++;
                             }
+
+                            if (j == numbersF.Count) break;
 
                             if (numbersF[j] > Parent.Value)
                             {
@@ -751,6 +642,8 @@ namespace BinaryTree
 
                             if (numbersF.Count == 0) break;
 
+                            if (numbersF.Count == j) break;
+
                             if (numbersF[j] < Parent.Value)
                             {
                                 for (int k = j; k <= numbersF.Count; k++)
@@ -760,7 +653,7 @@ namespace BinaryTree
                                     {
                                         Left.Left.Value = numbersF[k];
                                         numbersF.RemoveAt(k);
-                                        RightA = true;
+                                        RightB = true;
 
                                     }
 

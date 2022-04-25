@@ -14,7 +14,7 @@ namespace BinaryTree
         static void Main(string[] args)
         {
             Tree tree = new Tree();
-            tree.Insert();
+            tree.InsertRand();
             tree.Print();
             tree.Sort();
 
