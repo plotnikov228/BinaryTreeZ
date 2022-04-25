@@ -19,9 +19,6 @@ namespace BinaryTree
             Console.WriteLine("");
             tree.Sort();
             tree.Remove();
-            tree.Print();
-            Console.WriteLine("");
-            tree.Sort();
             Console.WriteLine("");
             tree.Find();
 

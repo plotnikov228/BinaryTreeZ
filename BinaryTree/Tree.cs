@@ -86,6 +86,7 @@ namespace BinaryTree
 
             for (int i = 0; i <= numbers.Count; i++)
             {
+                if (i == numbers.Count) break;
                 if(numbers[i] == l)
                 {
                     numbers.RemoveAt(i);
@@ -94,8 +95,14 @@ namespace BinaryTree
                 }
             }
 
-            if (Complete == true) Console.WriteLine($"Элемент {l} был удалён");
-
+            if (Complete == true)
+            {
+                Console.WriteLine($"Элемент {l} был удалён");
+                Console.WriteLine(" ");
+                Print();
+                Console.WriteLine(" ");
+                Sort();
+            }
             if (Complete == false) Console.WriteLine($"Элемент {l} не был найден");
         }
         public void Find()
@@ -108,8 +115,10 @@ namespace BinaryTree
 
             for (int i = 0; i <= numbers.Count; i++)
             {
+                if (i == numbers.Count) break;
                 if (numbers[i] == l)
                 {
+                    
                     Complete = true;
                     break;
                 }
@@ -732,9 +741,7 @@ namespace BinaryTree
         }
 
         public void Print()
-        {
-            Console.WriteLine("Прямой обход дерева: ");
-
+        {           
             foreach (var item in numbers)                                                                                                                                                           
             {
                 Console.WriteLine(item);
