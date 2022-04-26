@@ -15,7 +15,6 @@ namespace BinaryTree
         {
             Tree tree = new Tree();
             tree.InsertRand();
-            tree.CRL();
             tree.Print();
             Console.WriteLine("");
             tree.Sort();

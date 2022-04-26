@@ -56,17 +56,12 @@ namespace BinaryTree
         {
             int IndexCenter = numbers.Count / 2;           
             ICenter = IndexCenter;
-            Console.WriteLine(ICenter);
-
-            
 
             int IndexLeft = IndexCenter / 2;
             ILeft = IndexLeft;
-            Console.WriteLine(ILeft);
             
             int IndexRight = IndexCenter + IndexLeft;
             IRight = IndexRight;
-            Console.WriteLine(IRight);
 
             Console.WriteLine(" ");
         }
@@ -146,6 +141,7 @@ namespace BinaryTree
         }
         public void Sort()
         {
+            CRL();
             numbersF = numbers.GetRange(0, numbers.Count);
 
             Element Parent;
@@ -191,38 +187,50 @@ namespace BinaryTree
                 {
                     if (Right.Value != 899328798)
                     {
-                        
-
+                        int RightChek = Parent.Value;
                         Parent.Value = Right.Value;
                         Console.WriteLine("Parent = " + Parent.Value);
                         bool RightA = false;
                         bool RightB = false;
                         for (int j = 0; j <= numbersF.Count; j++)
                         {
-                            if (j >= (numbersF.Count / 2))
+                            if (j >= (numbersF.Count / 2) - 1)
                             {
                                 if (j == numbersF.Count) break;
 
                                 if (numbersF.Count == 0) break;
-
-                                if (numbersF[j] > Parent.Value)
+                                if(RightA == false)
                                 {
+                                    if (numbersF[j] > Parent.Value)
+                                    {
                                         Right.Right.Value = numbersF[j];
                                         numbersF.RemoveAt(j);
                                         RightA = true;
-                                }        
+                                    }
 
+                                }
+                                
+                               
                                 if (numbersF.Count == 0) break;
 
                                 if (j == numbersF.Count) break;
 
-                                if (numbersF[j] < Parent.Value)
+                                if (RightB == false)
                                 {
-                                        Right.Left.Value = numbersF[j];
-                                        numbersF.RemoveAt(j);
-                                        RightB = true;
+                                    if (numbersF[j] < Parent.Value)
+                                    {
+                                        if (numbersF[j] > RightChek)
+                                        {
+                                            Right.Left.Value = numbersF[j];
+                                            numbersF.RemoveAt(j);
+                                            RightB = true;
 
+                                        }
+
+
+                                    }
                                 }
+
                                 if (numbersF.Count == 0) break;
                                 if (RightA == true) { 
                                 if (RightB == true) break;
@@ -326,7 +334,7 @@ namespace BinaryTree
                 {
                     int RightLeft = Right.Left.Value;
                     int LeftLeft = Left.Left.Value;
-
+                    int RightChek = Left.Right.Value;
                     if (Right.Right.Value != 899328798)
                     {
 
@@ -337,7 +345,7 @@ namespace BinaryTree
                         bool RightB = false;
                         for (int j = 0; j <= numbersF.Count; j++)
                         {
-                            if(j >= (numbersF.Count / 2))
+                            if(j >= (numbersF.Count / 2) - 1)
                         {
                             if (j == numbersF.Count) break;
 
@@ -367,13 +375,18 @@ namespace BinaryTree
 
                                 if (numbersF.Count == 0) break;                            
 
-                                        if (numbersF[j] < Parent.Value)
-                                        {
+                                if (numbersF[j] < Parent.Value)
+                                {
+                                    if (numbersF[j] > RightChek)
+                                    {
                                             Right.Left.Value = numbersF[j];
                                             numbersF.RemoveAt(j);
                                             RightB = true;
                                             break;
-                                        }
+
+                                    }
+                                            
+                                }
 
 
                                 
@@ -408,7 +421,7 @@ namespace BinaryTree
                         for (int j = 0; j <= numbersF.Count; j++)
                         {
 
-                            if (j >= (numbersF.Count / 2))
+                            if (j >= (numbersF.Count / 2) - 1)
                             {
                                 if (j == numbersF.Count) break;
 
@@ -671,7 +684,6 @@ namespace BinaryTree
 
             }
         }
-
         public void Print()
         {           
             foreach (var item in numbers)                                                                                                                                                           
