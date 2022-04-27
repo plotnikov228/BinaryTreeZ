@@ -14,8 +14,6 @@ namespace BinaryTree
         List<int> numbers = new List<int>();
         List<int> OrigNumbers = new List<int>();
         List<int> numbersF = new List<int>();
-
-
         public struct LeftEl
         {
             public int Value;
