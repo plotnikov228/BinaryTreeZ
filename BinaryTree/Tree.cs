@@ -341,28 +341,23 @@ namespace BinaryTree
                         for (int j = 0; j <= numbersF.Count; j++)
                         {
                             if(j >= (numbersF.Count / 2) - 1)
-                        {
-                            if (j == numbersF.Count) break;
-
-                                if (numbersF.Count == 0) break;
-
+                            {
                                 if (j == numbersF.Count) break;
-                           
-                                
-                                        if (numbersF[j] > Parent.Value)
-                                        {
-                                            Right.Right.Value = numbersF[j];
-                                            numbersF.RemoveAt(j);
-                                            RightA = true;
 
-                                        }
+                                if (numbersF.Count == 0) break;                     
+                                
+                                if (numbersF[j] > Parent.Value)
+                                {
+                                     Right.Right.Value = numbersF[j];
+                                     numbersF.RemoveAt(j);
+                                     RightA = true;
+
+                                }
                                     
 
                                 if (numbersF.Count == 0) break;
 
-                                if (j == numbersF.Count) break;
-
-                                if (numbersF.Count == 0) break;                            
+                                if (j == numbersF.Count) break;                        
 
                                 if (numbersF[j] < Parent.Value)
                                     if (numbersF[j] > RightChek)
@@ -371,15 +366,14 @@ namespace BinaryTree
                                         numbersF.RemoveAt(j);  
                                         RightB = true;                                                                                     
                                     }
-                                            
-                                
-
-
-                                
 
                                 if (numbersF.Count == 0) break;
 
-                        }
+                            }
+                            
+                            if (RightA == true)
+                            if (RightB == true) break;
+                            
 
                         }
                         
@@ -392,10 +386,8 @@ namespace BinaryTree
                         {
                             Console.WriteLine("Left = " + Right.Left.Value);
                         }
-
-                        if (RightA == true)
-                            if (RightB == true) break;
                         Console.WriteLine("");
+                        
                     }
                     if (RightLeft != 899328798)
                     {
@@ -445,7 +437,10 @@ namespace BinaryTree
 
 
                             }
-                            
+
+                            if (RightA == true)
+                            if (RightB == true) break;
+                        
 
                         }
 
@@ -458,10 +453,8 @@ namespace BinaryTree
                         {
                             Console.WriteLine("Left = " + Right.Left.Value);
                         }
-
-                        if (RightA == true)
-                            if (RightB == true) break;
                         Console.WriteLine("");
+                        
                     }
                     if (Left.Right.Value != 899328798)
                     {
@@ -531,13 +524,11 @@ namespace BinaryTree
 
                             }
 
-                            
+                            if (RightA == true)
+                            if (RightB == true) break;
 
 
                         }
-
-
-
                         if (RightA == true)
                         {
                             Console.WriteLine("Right = " + Left.Right.Value);
@@ -546,10 +537,6 @@ namespace BinaryTree
                         {
                             Console.WriteLine("Left = " + Left.Left.Value);
                         }
-
-                        if (RightA == true)
-                            if (RightB == true) break;
-
                         Console.WriteLine("");
                     }
                     if (LeftLeft != 899328798)
@@ -625,7 +612,8 @@ namespace BinaryTree
 
 
                             }
-                            
+                            if (RightA == true)
+                            if (RightB == true) break;
                         }
 
 
@@ -639,8 +627,7 @@ namespace BinaryTree
                             Console.WriteLine("Left = " + Left.Left.Value);
                         }
 
-                        if (RightA == true)
-                            if (RightB == true) break;
+                        
 
                         Console.WriteLine("");
                     }
