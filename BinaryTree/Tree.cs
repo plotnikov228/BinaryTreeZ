@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    internal class Tree
+    internal class Tree // создать ещё один список, для 4 строки, сделать высоту дерева
     {
         int ICenter;
         int IRight;
@@ -14,6 +14,7 @@ namespace BinaryTree
         List<int> numbers = new List<int>();
         List<int> OrigNumbers = new List<int>();
         List<int> numbersF = new List<int>();
+        List<int> ForSort = new List<int>();
         public struct LeftEl
         {
             public int Value;
@@ -140,7 +141,8 @@ namespace BinaryTree
         {
             CRL();
             numbersF = numbers.GetRange(0, numbers.Count);
-
+            int TreeHigh = 0;
+            int TreeHighElement = 8;
             Element Parent;
             Element Left;
             Element Right;
@@ -164,6 +166,7 @@ namespace BinaryTree
 
                 if (i == 0)
                 {
+                    TreeHigh++;
                     Parent.Value = numbersF[ICenter - 1];
                     Center = Parent.Value;
                     Right.Value = numbersF[IRight - 1];
@@ -185,6 +188,7 @@ namespace BinaryTree
 
                 if (i == 1)
                 {
+                    TreeHigh++;
                     if (Right.Value != 899328798)
                     {
                         int RightChek = Parent.Value;
@@ -326,8 +330,10 @@ namespace BinaryTree
                     Console.WriteLine("");
                 }
 
-                else
+                if (i == 2)
                 {
+                    TreeHigh++;
+                    for (int p = 0; p <= TreeHighElement; p++) ForSort.Add(0);
                     int RightLeft = Right.Left.Value;
                     int LeftLeft = Left.Left.Value;
                     if (Right.Right.Value != 899328798)
@@ -344,7 +350,6 @@ namespace BinaryTree
                             if (j == numbersF.Count) break;
                             if (numbersF[j] >= Center)
                             {
-                                if (j == numbersF.Count) break;
 
                                 if (numbersF.Count == 0) break;
 
@@ -383,10 +388,12 @@ namespace BinaryTree
                         if (RightA == true)
                         {
                             Console.WriteLine("Right = " + Right.Right.Value);
+                            ForSort[7] = Right.Right.Value;
                         }
                         if (RightB == true)
                         {
                             Console.WriteLine("Left = " + Right.Left.Value);
+                            ForSort[6] = Right.Left.Value;
                         }
                         Console.WriteLine("");
 
@@ -440,10 +447,13 @@ namespace BinaryTree
                         if (RightA == true)
                         {
                             Console.WriteLine("Right = " + Right.Right.Value);
+                            ForSort[5] = Right.Right.Value;
                         }
                         if (RightB == true)
                         {
                             Console.WriteLine("Left = " + Right.Left.Value);
+                            ForSort[4] = Right.Left.Value;
+
                         }
                         Console.WriteLine("");
 
@@ -499,10 +509,14 @@ namespace BinaryTree
                         if (RightA == true)
                         {
                             Console.WriteLine("Right = " + Left.Right.Value);
+                            ForSort[3] = Left.Right.Value;
+
                         }
                         if (RightB == true)
                         {
                             Console.WriteLine("Left = " + Left.Left.Value);
+                            ForSort[2] = Left.Left.Value;
+
                         }
                         Console.WriteLine("");
                     }
@@ -520,7 +534,7 @@ namespace BinaryTree
                             if (j == numbersF.Count) break;
                             if (numbersF[j] < End)
                             {
-                                if (j == numbersF.Count) break;
+  
 
                                 if (numbersF.Count == 0) break;
 
@@ -533,12 +547,8 @@ namespace BinaryTree
 
                                 }
 
-
-
-
                                 if (numbersF.Count == 0) break;
 
-                                if (numbersF.Count == j) break;
 
                                 if (numbersF[j] < Parent.Value)
                                 {
@@ -565,10 +575,12 @@ namespace BinaryTree
                         if (RightA == true)
                         {
                             Console.WriteLine("Right = " + Left.Right.Value);
+                            ForSort[1] = Left.Right.Value;
                         }
                         if (RightB == true)
                         {
                             Console.WriteLine("Left = " + Left.Left.Value);
+                            ForSort[0] = Left.Left.Value;
                         }
 
 
@@ -577,6 +589,57 @@ namespace BinaryTree
                     }
                 }
 
+                if (numbersF.Count == 0) break;
+
+                if (TreeHigh >= 3)
+                {
+                    if(TreeHighElement != 8) for (int p = 0; p <= TreeHighElement; p++) ForSort.Add(0);
+                    
+                    bool RightTrue = false;
+                    bool LeftTrue = false;
+                    for (int j = TreeHighElement - 1; j >= 0; j--)
+                    {
+
+                        if (numbersF.Count == 0) break;
+                        Parent.Value = ForSort[j];
+                        Console.WriteLine("Parent = " + Parent.Value);
+
+                        for (int k = 0; k <= numbersF.Count; k++)
+                        {
+                            if (Parent.Value == 0) break;
+                            if (k == numbersF.Count) break;
+
+                            if (numbersF[k] > Parent.Value)
+                            {
+                                Console.WriteLine("Right = " + numbersF[k]);
+                                numbersF.RemoveAt(k);
+                                RightTrue = true;
+                            }
+
+                            if (numbersF.Count == 0) break;
+                            if (k == numbersF.Count) break;
+                            if (numbersF[k] < Parent.Value)
+                                if(numbersF[k] > ForSort[j - 1])
+                            {
+                                Console.WriteLine("Left = " + numbersF[k]);
+                                numbersF.RemoveAt(k);
+                                LeftTrue = true;
+                            }
+
+                            if (k == numbersF.Count) break;
+                            if (numbersF.Count == 0) break;
+
+                            if (RightTrue == true)
+                                if (LeftTrue == true) break;
+                        }
+
+                        Console.WriteLine(" ");
+
+                    }
+
+                    TreeHighElement = TreeHighElement + TreeHighElement;
+                    TreeHigh++;
+                }
             }
         }
         public void Print()
