@@ -344,10 +344,9 @@ namespace BinaryTree
                         Console.WriteLine("Parent = " + Parent.Right.Value);
                         bool RightA = false;
                         bool RightB = false;
-                        for (int j = 0; j <= numbersF.Count; j++)
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
                             if (numbersF.Count == 0) break;
-                            if (j == numbersF.Count) break;
                             if (numbersF[j] >= Center)
                             {
 
@@ -405,10 +404,9 @@ namespace BinaryTree
                         Console.WriteLine("Parent = " + Parent.Value);
                         bool RightA = false;
                         bool RightB = false;
-                        for (int j = 0; j <= numbersF.Count; j++)
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
                             if (numbersF.Count == 0) break;
-                            if (j == numbersF.Count) break;
                             if (numbersF[j] >= Center)
                             {
                                 if (j == numbersF.Count) break;
@@ -466,10 +464,9 @@ namespace BinaryTree
                         Console.WriteLine("Parent = " + Parent.Left.Value);
                         bool RightA = false;
                         bool RightB = false;
-                        for (int j = 0; j <= numbersF.Count; j++)
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
                             if (numbersF.Count == 0) break;
-                            if (j == numbersF.Count) break;
                             if (numbersF[j] < End)
                             {
                                 if (j == numbersF.Count) break;
@@ -528,10 +525,9 @@ namespace BinaryTree
                         Console.WriteLine("Parent = " + Parent.Left.Value);
                         bool RightA = false;
                         bool RightB = false;
-                        for (int j = 0; j <= numbersF.Count; j++)
+                        for (int j = 0; j <= numbersF.Count - 1; j++)
                         {
                             if (numbersF.Count == 0) break;
-                            if (j == numbersF.Count) break;
                             if (numbersF[j] < End)
                             {
   
@@ -603,11 +599,10 @@ namespace BinaryTree
                         if (numbersF.Count == 0) break;
                         Parent.Value = ForSort[j];
                         Console.WriteLine("Parent = " + Parent.Value);
-
-                        for (int k = 0; k <= numbersF.Count; k++)
+                        int last = ForSort[j - 1];
+                        for (int k = 0; k <= numbersF.Count - 1; k++)
                         {
                             if (Parent.Value == 0) break;
-                            if (k == numbersF.Count) break;
 
                             if (numbersF[k] > Parent.Value)
                             {
@@ -618,13 +613,16 @@ namespace BinaryTree
 
                             if (numbersF.Count == 0) break;
                             if (k == numbersF.Count) break;
-                            if (numbersF[k] < Parent.Value)
-                                if(numbersF[k] > ForSort[j - 1])
-                            {
+
+                            if (j == 0) last = 0;
+
+                                if (numbersF[k] < Parent.Value)
+                                if(numbersF[k] > last)
+                                {
                                 Console.WriteLine("Left = " + numbersF[k]);
                                 numbersF.RemoveAt(k);
                                 LeftTrue = true;
-                            }
+                                }
 
                             if (k == numbersF.Count) break;
                             if (numbersF.Count == 0) break;
